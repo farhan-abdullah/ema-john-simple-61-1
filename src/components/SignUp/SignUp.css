@@ -62,3 +62,6 @@ div .btn-submit {
 div .btn-submit:hover {
 	background-color: greenyellow;
 }
+.text-error {
+	color: rgb(215, 41, 41);
+}
