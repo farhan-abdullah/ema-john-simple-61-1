@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './SignUp.css';
 import { Link } from 'react-router-dom';
+import AuthProvider, { AuthContext } from '../Provider/AuthProvider';
 const SignUp = () => {
 	const [error, setError] = useState('');
+	//3rd step firebase for sign up
+	const { createUser } = useContext(AuthContext);
 	const handleSignUp = (event) => {
 		event.preventDefault();
 		const form = event.target;
 		const email = form.email.value;
 		const password = form.password.value;
 		const confirm = form.confirm.value;
-		console.log(email, password, confirm);
+		//reset error
+		setError('')
 		if (password !== confirm) {
 			setError('Your password did not match');
-			return
-		}else if(password.length < 6){
-			setError('Password must be 6 charecter longer')
-			return
+			return;
+		} else if (password.length < 6) {
+			setError('Password must be 6 charecter longer');
+			return;
 		}
+		//4th step firebase
+		createUser(email, password)
+			.then((res) => {
+				const loggedUser = res.user;
+				console.log(loggedUser);
+			})
+			.catch((e) => {
+				setError(e.message);
+			});
 	};
 	return (
 		<div className='form-container'>

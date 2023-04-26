@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Login.css';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 const Login = () => {
+	const { logIn } = useContext(AuthContext);
+
+	//3rd step firebase for login
+
+	const handleLogIn = (event) => {
+		event.preventDefault();
+		const form = event.target;
+		const email = form.email.value;
+		const password = form.password.value;
+		logIn(email, password)
+			.then((res) => {
+				const loggedUser = res.user;
+				console.log(loggedUser);
+			})
+			.catch((e) => {
+				console.log(e.message);
+			});
+	};
 	return (
 		<div className='form-container'>
 			<h2 className='form-title'>Login</h2>
-			<form>
+			<form onSubmit={handleLogIn}>
 				<div className='form-control'>
 					<label htmlFor='email'>Email</label>
 					<input type='email' name='email' id='' required />
