@@ -19,8 +19,13 @@
 
 /*private route o protected route
 1. create privateRoute.jsx and  
+*/
 
-
-
+/*
+HOSTING
+--------------------
+one time per PC
+1. npm install -g firebase-tools
+2. firebase login
 
 */
