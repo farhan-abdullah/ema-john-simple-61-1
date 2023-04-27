@@ -1,8 +1,12 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import './Login.css';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 const Login = () => {
+	const navigate = useNavigate();
+
 	const { logIn } = useContext(AuthContext);
 
 	//3rd step firebase for login
@@ -15,7 +19,9 @@ const Login = () => {
 		logIn(email, password)
 			.then((res) => {
 				const loggedUser = res.user;
-				console.log(loggedUser);
+				//redirects to root
+				form.reset()
+				navigate('/');
 			})
 			.catch((e) => {
 				console.log(e.message);

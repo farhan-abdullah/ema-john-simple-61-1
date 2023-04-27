@@ -18,7 +18,7 @@
 
 
 /*private route o protected route
-
+1. create privateRoute.jsx and  
 
 
 

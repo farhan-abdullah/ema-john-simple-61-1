@@ -1,15 +1,21 @@
 import React, { useContext } from 'react';
 import './Header.css';
+import { useNavigate } from 'react-router-dom';
+
 import logo from '../../images/Logo.svg';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 
 const Header = () => {
+	const navigate = useNavigate();
+
 	//4th step, to use context api import AuthContext from AuthProvider
 	const { user, logOut } = useContext(AuthContext);
 	const handleLogOut = () => {
 		logOut()
-			.then((result) => {})
+			.then((result) => {
+				navigate('login');
+			})
 			.catch((error) => {
 				console.log(error.message);
 			});

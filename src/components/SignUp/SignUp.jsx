@@ -1,8 +1,13 @@
 import React, { useContext, useState } from 'react';
 import './SignUp.css';
+import { useNavigate } from 'react-router-dom';
+
 import { Link } from 'react-router-dom';
 import AuthProvider, { AuthContext } from '../Provider/AuthProvider';
 const SignUp = () => {
+	//redirects
+	const navigate = useNavigate();
+
 	const [error, setError] = useState('');
 	//3rd step firebase for sign up
 	const { createUser } = useContext(AuthContext);
@@ -13,7 +18,7 @@ const SignUp = () => {
 		const password = form.password.value;
 		const confirm = form.confirm.value;
 		//reset error
-		setError('')
+		setError('');
 		if (password !== confirm) {
 			setError('Your password did not match');
 			return;
@@ -25,7 +30,7 @@ const SignUp = () => {
 		createUser(email, password)
 			.then((res) => {
 				const loggedUser = res.user;
-				console.log(loggedUser);
+				navigate('/');
 			})
 			.catch((e) => {
 				setError(e.message);

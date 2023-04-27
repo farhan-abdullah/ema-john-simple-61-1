@@ -13,6 +13,9 @@ const auth = getAuth(app);
 export const AuthContext = createContext(null);
 // second step(context api)
 const AuthProvider = ({ children }) => {
+	//loding jai ta true thakbe, kaj shesh hoe gale false pathay dibo ete
+	const [loading, setLoading] = useState(true);
+
 	const [user, setUser] = useState(null);
 	//2nd step firebase for sign up
 	const createUser = (email, password) => {
@@ -30,6 +33,7 @@ const AuthProvider = ({ children }) => {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 			setUser(currentUser);
+			setLoading(false);
 		});
 		// stop observing by unmounting
 		return () => {
@@ -37,7 +41,7 @@ const AuthProvider = ({ children }) => {
 		};
 	}, []);
 
-	const authInfo = { user, createUser, logIn, logOut };
+	const authInfo = { user, createUser, logIn, logOut, setLoading, loading };
 	return (
 		<div>
 			<AuthContext.Provider value={authInfo}>
