@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react';
 import './SignUp.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 import AuthProvider, { AuthContext } from '../Provider/AuthProvider';
 const SignUp = () => {
 	//redirects
 	const navigate = useNavigate();
-
+	const location = useLocation();
+	const from = location?.state?.from?.pathname || '/';
 	const [error, setError] = useState('');
 	//3rd step firebase for sign up
 	const { createUser } = useContext(AuthContext);
@@ -30,7 +31,7 @@ const SignUp = () => {
 		createUser(email, password)
 			.then((res) => {
 				const loggedUser = res.user;
-				navigate('/');
+				navigate(form);
 			})
 			.catch((e) => {
 				setError(e.message);

@@ -19,10 +19,12 @@ const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	//2nd step firebase for sign up
 	const createUser = (email, password) => {
+		setLoading(true);
 		return createUserWithEmailAndPassword(auth, email, password);
 	};
 	//2nd step firebase for login
 	const logIn = (email, password) => {
+		setLoading(true);
 		return signInWithEmailAndPassword(auth, email, password);
 	};
 	//firebase for logged out

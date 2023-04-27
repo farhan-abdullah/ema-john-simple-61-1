@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import './Login.css';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 const Login = () => {
+	//redirects
 	const navigate = useNavigate();
-
+	const location = useLocation();
+	const from = location?.state?.from?.pathname || '/';
+	// finish redirects
 	const { logIn } = useContext(AuthContext);
 
 	//3rd step firebase for login
-
 	const handleLogIn = (event) => {
 		event.preventDefault();
 		const form = event.target;
@@ -19,9 +21,9 @@ const Login = () => {
 		logIn(email, password)
 			.then((res) => {
 				const loggedUser = res.user;
-				//redirects to root
-				form.reset()
-				navigate('/');
+				form.reset();
+				//redirects to root, and replace means  do not track record
+				navigate(from, { replace: true });
 			})
 			.catch((e) => {
 				console.log(e.message);
