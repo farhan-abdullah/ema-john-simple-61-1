@@ -7,9 +7,13 @@ import { AuthContext } from '../Provider/AuthProvider';
 const Header = () => {
 	//4th step, to use context api import AuthContext from AuthProvider
 	const { user, logOut } = useContext(AuthContext);
-	const handleLogOut = ()=>{
-		
-	}
+	const handleLogOut = () => {
+		logOut()
+			.then((result) => {})
+			.catch((error) => {
+				console.log(error.message);
+			});
+	};
 	return (
 		<nav className='header'>
 			<img src={logo} alt='' />

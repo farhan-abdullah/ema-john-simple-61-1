@@ -15,3 +15,12 @@
 4. set context value
 5. set the provider in route
 */
+
+
+/*private route o protected route
+
+
+
+
+
+*/
