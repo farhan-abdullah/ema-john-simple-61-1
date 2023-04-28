@@ -27,5 +27,13 @@ HOSTING
 one time per PC
 1. npm install -g firebase-tools
 2. firebase login
-
+for each project one time 
+1. firebase init
+2. proceed-link3. hosting: firebase (up and down arrow) use space bar to select
+3. which project as public directory : dist 
+4. single page application: yes
+5. continuous deployment: no
+for every time deploy
+1. npm run build
+2. firebase deploy
 */
